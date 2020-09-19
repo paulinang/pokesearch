@@ -44,7 +44,10 @@ const getFlavorText = (apiData, language = 'en', gameVersion = 'blue') => {
     (txt) => txt.language.name === language && txt.version.name === gameVersion
   );
   if (filtered.length > 0 && filtered[0]['flavor_text']) {
-    return filtered[0]['flavor_text'];
+    // pokeAPI returns flavor text with these two escaped characters
+    // there might be more, but so far `\n` and `\f` are what I've run into
+    // \f is espcially problematic as some browsers convert it into a no-space or an arrow symbol
+    return filtered[0]['flavor_text'].replace(/\n|\f/g, ' ');
   }
 };
 

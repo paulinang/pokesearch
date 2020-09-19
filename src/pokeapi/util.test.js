@@ -65,7 +65,7 @@ describe('pokeAPI utility functions to help with validation and parsing', () => 
       weight: 60,
       types: ['Electric'],
       flavorText:
-        'When several of\nthese POKéMON\ngather, their\felectricity could\nbuild and cause\nlightning storms.',
+        'When several of these POKéMON gather, their electricity could build and cause lightning storms.',
     };
 
     const result = parsePokemon(getPikachuRes, getPikachuSpeciesRes);
