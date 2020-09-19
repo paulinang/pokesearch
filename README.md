@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pokemon Search with React and pokeapi.co
 
-## Available Scripts
+This was a project for me to practice creating a React app with pokeapi.co integration.
+I set a limited spec to keep myself focused on a minimum viable product:
 
-In the project directory, you can run:
+- Allow users to search for the classic pokemon (#1 - 151)
+- Users can search by ID, name, or type
+- Each Pokemon should be shown with name, id, type, weight, height, picture, habitat, and flavor text
 
-### `npm start`
+## App component overview
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- `isLoading` (boolean) depends on wheter a API request is in progress
+- `error` (string) comes from search logic error and can be cleared
+- `input` (string) comes from user's input to the search form
+- `pokemon` (array of objects) is the parsed response from API requests
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+A reducer function updates these state properties depending on what action it has received.
+Finished API requests or event handlers can dispatch different actions to update state accordingly.
 
-### `npm test`
+![Graphic of App components](https://github.com/paulinang/pokesearch/blob/master/app-components.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Dev Notes
 
-### `npm run build`
+### Topics I practiced:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Creating React components and managing state + props
+- React hooks, especially `useReducer`
+- API calls in React with axios
+- Writing some tests with Jest
+- CSS styling with Grid and Flexbox
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Areas I'd like to improve on:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- My submitHandler function seems too complex as I chained a couple API calls together depending on the results of one.
+- My error propogation through chained calls could be cleaner, I will try to find more articles on how to handle this.
+- Better protection against race conditions for search requests. I dealt with the issue of a user trying a new search while a previous one is still in progress by disabling the Search feature while `isLoading` is `true`, but that is only a front-end protection.
+- More test coverage - I mostly covered the utils for dealing with the pokeapi and a couple basic tests for the starting components. I would like to cover component behavior when state changes with the reducer function.
 
-### `npm run eject`
+### Possible features to add
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Allow searching by multiple types, names, IDs. At this point, I think I should create a dedicated backend to handle inputs and API calls, instead of cramming it all into the searchHandler function.
+- More interactivity with results: get pokemon of similar type if only one was found for name/id, get evolution of pokemon, etc.

@@ -1,0 +1,38 @@
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 15px;
+    align-items: start;
+    justify-items: stretch;
+    margin: auto;
+}
+
+.pokemon-single {
+    /* for only 1 pokemon result, we center the item */
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 820px) {
+    /*
+    intermediate screens can have 2 pokemon per row
+    grid row should be 320*2 + 15 = 655px
+    parent container has width of 80vw, so only screens of width ~1230px or more
+    */
+    .pokemon-grid {
+        grid-template-columns: repeat(2, 320px);
+        width: 650px;
+    }
+}
+
+@media (min-width: 1230px) {
+    /*
+    max out at 3 pokemon per row
+    grid row should be 320*3 + 15* 2 = 990px
+    parent container has width of 80vw, so only screens of width ~1230px or more
+    */
+    .pokemon-grid {
+        grid-template-columns: repeat(3, 320px);
+        width: 980px;
+    }
+}

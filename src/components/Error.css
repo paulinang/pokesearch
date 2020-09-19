@@ -1,0 +1,12 @@
+.error {
+    color: #d8000c;
+    margin: auto;
+    width: 50%;
+    background-color: #ffd2d2;
+    padding: 12px;
+    text-align: center;
+}
+
+.error:hover {
+    cursor: pointer;
+}
